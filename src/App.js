@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-function App() {
+const Calculator = () => {
+  const [value, setValue] = useState(10);
+  const [message, setMessage] = useState('');
+
+  const increment = () => {
+    if (value < 15) {
+      setValue(prevValue => prevValue + 1);
+      setMessage('');
+    }
+    if (value + 1 === 15) {
+      setMessage('Це максимальне число');
+    }
+  };
+
+  const decrement = () => {
+    if (value > 5) {
+      setValue(prevValue => prevValue - 1);
+      setMessage('');
+    }
+    if (value - 1 === 5) {
+      setMessage('Це мінімальне число');
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Калькулятор</h1>
+      <p>Значення: {value}</p>
+      <p style={{ color: 'red' }}>{message}</p>
+      <button onClick={decrement} disabled={value === 5}>Зменшити</button>
+      <button onClick={increment} disabled={value === 15}>Збільшити</button>
     </div>
   );
-}
+};
 
-export default App;
+export default Calculator;
